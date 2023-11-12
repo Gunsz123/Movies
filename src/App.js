@@ -4,7 +4,7 @@ import SearchIcon from "./search.svg";
 import "./App.css";
 
 // Use the secure HTTPS API URL and provide a valid API key
-const API_URL = "https://www.omdbapi.com?apikey=YOUR_API_KEY";
+const API_URL = "https://www.omdbapi.com?apikey=d5ade976";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -21,7 +21,7 @@ const App = () => {
 
       setMovies(data.Search);
     } catch (error) {
-      console.error("Error fetching movies:", error);
+      console.error("Error fetching movies:, Run this on your local machine", error);
     }
   };
 
