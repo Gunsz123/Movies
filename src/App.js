@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-
 import MovieCard from "./MovieCard";
 import SearchIcon from "./search.svg";
 import "./App.css";
 
-const API_URL = "http://www.omdbapi.com?apikey=b6003d8a";
+// Use the secure HTTPS API URL and provide a valid API key
+const API_URL = "https://www.omdbapi.com?apikey=YOUR_API_KEY";
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,10 +15,14 @@ const App = () => {
   }, []);
 
   const searchMovies = async (title) => {
-    const response = await fetch(`${API_URL}&s=${title}`);
-    const data = await response.json();
+    try {
+      const response = await fetch(`${API_URL}&s=${title}`);
+      const data = await response.json();
 
-    setMovies(data.Search);
+      setMovies(data.Search);
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+    }
   };
 
   return (
@@ -37,7 +41,7 @@ const App = () => {
       {movies?.length > 0 ? (
         <div className="container">
           {movies.map((movie) => (
-            <MovieCard movie={movie} />
+            <MovieCard key={movie.imdbID} movie={movie} />
           ))}
         </div>
       ) : (
